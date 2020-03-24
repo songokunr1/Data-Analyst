@@ -9,10 +9,25 @@ import pathlib
 import datetime
 import os.path
 
+""" 
+Program organize file in your dictionary. The job is to copy files to folder with their extension 
+
+How to use program:
+    1: chose path to your file
+    2: run program
+    3: copy some file into your folder
+"""
+
+#TODO use one class for all methods
+#TODO make universal "create_path" function, use lib path. It will be working with linux to
+
+
+basic_path = "C:\\Users\\matejko\\Desktop"
+
 
 class HelperFunctions:
     @staticmethod
-    def find_file_extenction(filename):
+    def find_file_extension(filename):
         return re.search('(?<=\.).*', filename).group(0)
 
     @staticmethod
@@ -35,7 +50,7 @@ class MyHandler(FileSystemEventHandler):
             index = 0
             time = datetime.datetime.now()
             try:
-                ext = HelperFunctions.find_file_extenction(filename)
+                ext = HelperFunctions.find_file_extension(filename)
             except AttributeError:
                 continue
             year_path = HelperFunctions.create_path(basic_path, ext, str(time.strftime("%Y-%m")))
@@ -74,7 +89,6 @@ class MyHandler(FileSystemEventHandler):
 
 
 # basic_path = "C:\\Users\\matejko\\Downloads\\Python\\Download"
-basic_path = "C:\\Users\\matejko\\Desktop"
 print(os.listdir(basic_path))
 event_handler = MyHandler()
 observer = Observer()
